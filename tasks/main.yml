@@ -1,0 +1,15 @@
+---
+
+- name: mysql関連必要パッケージ
+  action: apt name={{item}}
+  with_items:
+    - mysql-server
+    - python-mysqldb
+    - libmysqld-dev
+
+- name: DB作成
+  mysql_db: name={{ mysql_dbname }} state=present encoding=utf8
+
+- name: ユーザー作成
+  mysql_user: name={{ mysql_dbuser }} password={{ mysql_dbpass }} priv={{ mysql_dbname }}.*:ALL
+

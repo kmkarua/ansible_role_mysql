@@ -1,0 +1,6 @@
+---
+
+# mysql
+mysql_dbname: testdb
+mysql_dbuser: testdb
+mysql_dbpass: testdb
