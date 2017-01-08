@@ -1,6 +1,6 @@
 ---
 
 # mysql
-mysql_dbname: testdb
-mysql_dbuser: testdb
-mysql_dbpass: testdb
+mysql_dbname: hogedb
+mysql_dbuser: hogedb
+mysql_dbpass: hogedb

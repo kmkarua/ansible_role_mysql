@@ -6,10 +6,25 @@
     - mysql-server
     - python-mysqldb
     - libmysqld-dev
+  when: ansible_distribution == "Ubuntu"
+
+- name: mysql関連必要パッケージ
+  yum: name={{ item }} enablerepo=remi
+  with_items:
+    - mysql-server
+    - mysql-devel
+    - mysql
+    - MySQL-python
+    - mysql-utilities
+  when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
+
+- name: mysqlの有効化
+  service: name=mysqld state=running enabled=yes
+  when: ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
 
 - name: DB作成
-  mysql_db: name={{ mysql_dbname }} state=present encoding=utf8
+  mysql_db: name={{mysql_dbname}} state=present encoding=utf8
 
 - name: ユーザー作成
-  mysql_user: name={{ mysql_dbuser }} password={{ mysql_dbpass }} priv={{ mysql_dbname }}.*:ALL
+  mysql_user: name={{mysql_dbuser}} password={{mysql_dbpass}} priv={{mysql_dbname}}.*:ALL
 
